@@ -15,6 +15,7 @@
     "multer": "^2.1.1",
     "mysql2": "^3.16.2",
     "nodemailer": "^9.0.3",
+    "onnxruntime-node": "^1.27.0",
     "resend": "^6.18.0"
   }
 }

@@ -10,6 +10,7 @@ import pacientesRoutes from './routes/pacientes.routes.js';
 import sesionesRoutes from './routes/sesiones.routes.js';
 import medicosRoutes from './routes/medicos.routes.js';
 import statsRoutes from './routes/stats.routes.js';
+import prediccionesRoutes from './routes/predicciones.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +36,7 @@ app.use('/api/stats-admin', statsRoutes);
 app.use('/api', pacientesRoutes);
 app.use('/api', sesionesRoutes);
 app.use('/api', medicosRoutes);
+app.use('/api/inference', prediccionesRoutes);
 
 // --- 3. ARCHIVOS ESTÁTICOS (CSS, JS, IMÁGENES, Y LOS .HTML COMPILADOS) ---
 app.use(express.static(clientRoot));
