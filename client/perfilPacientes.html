@@ -25,14 +25,19 @@
 
         <div class="app-header d-flex align-items-center justify-content-between px-4 border-bottom">
           <div class="d-flex align-items-center flex-grow-1">
-            <button type="button" class="toggle-sidebar btn btn-sm d-xl-none me-3"><i class="ri-menu-line fs-4 text-primary"></i></button>
-            <h5 class="mb-0 fw-bold text-dark">Expediente: <span class="text-primary" id="nombreHeaderTitulo">Cargando...</span></h5>
+            <button type="button" class="toggle-sidebar btn btn-sm d-xl-none me-3"><i
+                class="ri-menu-line fs-4 text-primary"></i></button>
+            <h5 class="mb-0 fw-bold text-dark">Expediente: <span class="text-primary"
+                id="nombreHeaderTitulo">Cargando...</span></h5>
           </div>
-          
+
           <div class="header-actions d-flex align-items-center gap-2">
             <div class="dropdown ms-2">
-              <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" data-bs-toggle="dropdown">
-                <img src="assets/images/doctor6.png" class="rounded-circle border border-2 border-white shadow-sm img-medico-perfil medico-foto-dinamica" width="42" height="42">
+              <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!"
+                data-bs-toggle="dropdown">
+                <img src="assets/images/doctor6.png"
+                  class="rounded-circle border border-2 border-white shadow-sm img-medico-perfil medico-foto-dinamica"
+                  width="42" height="42">
               </a>
               <div class="dropdown-menu dropdown-menu-end shadow-sm border-0">
                 <div class="p-3 border-bottom">
@@ -52,7 +57,8 @@
 
         <div class="bg-white border-bottom d-flex align-items-center justify-content-between px-4 py-2">
           <div class="d-flex align-items-center gap-2 text-secondary fw-medium small">
-            <i class="ri-home-4-line"></i> <span class="text-secondary opacity-50">/</span> <span class="text-dark">Perfil del Paciente</span>
+            <i class="ri-home-4-line"></i> <span class="text-secondary opacity-50">/</span> <span
+              class="text-dark">Perfil del Paciente</span>
           </div>
           <div class="d-flex align-items-center border rounded overflow-hidden shadow-sm bg-white">
             <div class="bg-primary-subtle px-3 py-1 border-end border-light">
@@ -77,7 +83,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                   <span class="info-label mb-0">Nombre del Paciente</span>
                   <button type="button" data-bs-toggle="modal" data-bs-target="#modalEditar" title="Editar Datos"
-                          style="background:var(--accent-color); color:#fff; border:none; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    style="background:var(--accent-color); color:#fff; border:none; border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
                     <i class="ri-edit-2-line" style="font-size:0.7rem;"></i>
                   </button>
                 </div>
@@ -121,485 +127,534 @@
               </div>
             </div>
 
-<div class="profile-content">
-  
-  <div class="row gx-4">
-    <div class="col-md-6 border-end">
-      <div class="mb-2 d-flex align-items-center justify-content-between">
-        <div>
-          <h5 class="fw-bold text-dark mb-0"><i class="ri-cpu-line me-2 text-primary"></i>Dispositivo</h5>
-          <p class="text-muted small mb-0">Equipo seleccionado.</p>
-        </div>
-        
-        <div class="dropdown">
-          <button class="btn btn-primary btn-sm rounded-circle shadow-sm d-flex align-items-center justify-content-center" 
-                  type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                  style="width: 32px; height: 32px; padding: 0;">
-            <i class="ri-add-line fw-bold" style="font-size: 1.2rem;"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end p-2 shadow-lg border-0" style="width: 280px; max-height: 350px; overflow-y: auto;">
-            <h6 class="dropdown-header border-bottom mb-2">Seleccionar Dispositivo</h6>
-            <div id="itemsDispositivosDisponibles"></div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="contenedorChecksDinamicos" class="row gx-2 gy-2 mb-3">
-        </div>
-    </div>
+            <div class="profile-content">
 
-    <div class="col-md-6">
-      <div class="mb-2 d-flex align-items-start justify-content-between px-md-2">
-        <div>
-          <h5 class="fw-bold text-dark mb-0"><i class="ri-flask-line me-2 text-primary"></i>Pruebas</h5>
-          <p class="text-muted small mb-0">Protocolo actual.</p>
-        </div>
-
-        <div class="dropdown">
-          <button class="btn btn-outline-primary btn-sm rounded-circle shadow-sm d-flex align-items-center justify-content-center" 
-                  type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                  style="width: 32px; height: 32px; padding: 0;">
-            <i class="ri-add-line fw-bold" style="font-size: 1.2rem;"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end p-2 shadow-lg border-0" style="width: 280px; max-height: 350px; overflow-y: auto;">
-            <h6 class="dropdown-header border-bottom mb-2">Seleccionar Prueba</h6>
-            <div id="itemsPruebasDisponibles"></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="contenedorPruebasDinamicas" class="row gx-2 gy-2 mb-3 px-md-2" 
-           style="max-height: 200px; overflow-y: auto; overflow-x: hidden;">
-      </div>
-    </div>
-  </div>
-
-  <p class="text-muted small text-center mb-0 mt-3"><i class="ri-information-line"></i> Se requiere 1 dispositivo y 1 prueba para comenzar.</p>
-
-  <div class="d-flex justify-content-end mb-2">
-    <button id="btnIniciarSesion" class="btn shadow-sm d-inline-flex align-items-center justify-content-center fw-bold py-2 px-4" 
-            style="background-color: var(--accent-color); color: white; border-radius: 10px; border: none; transition: all 0.3s ease; font-size: 0.85rem;">
-      <i class="ri-play-circle-fill me-2 fs-5"></i> 
-      INICIAR SESIÓN
-    </button>
-  </div>
-
-  <hr class="my-3 opacity-25">
-
-<h5 class="fw-bold text-dark mb-3">
-    <i class="ri-history-line me-2 text-primary"></i>Historial de Sesiones EEG
-</h5>
-
-<div class="table-responsive tabla-scroll-sesiones">
-    <table class="table table-sesiones table-hover align-middle bg-white mb-0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Fecha y Hora</th>
-                <th>Dispositivo</th>
-                <th>Duración</th>
-                <th class="text-center">Pruebas</th>
-                <th>Pronóstico</th>
-                <th class="text-center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tablaSesionesBody">
-            </tbody>
-    </table>
-</div>
-<div class="modal fade" id="modalResumen" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header bg-dark text-white d-print-none">
-                <h5 class="modal-title"><i class="ri-printer-line me-2"></i>Vista Previa de Reporte</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            
-            <div class="modal-body p-0" id="cuerpoModalResumen">
-                <div class="text-center py-5">
-                    <div class="spinner-border text-primary" role="status"></div>
-                    <p class="mt-2 text-muted">Generando informe médico...</p>
-                </div>
-            </div>
-
-            <div class="modal-footer bg-light d-print-none">
-    <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-success shadow-sm px-4" id="btnDescargarCSV">
-        <i class="ri-file-chart-line me-1"></i> Descargar CSV
-    </button>
-    <button type="button" class="btn btn-primary shadow-sm px-4" id="btnDescargarPDF">
-        <i class="ri-file-pdf-line me-1"></i> Descargar PDF
-    </button>
-    
-</div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de la gráfica EEG aislada de una sola prueba (se abre desde el ícono del ojo) -->
-<div class="modal fade" id="modalEEGPrueba" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tituloModalEEGPrueba">EEG de la prueba</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="reporte-grafica-wrap" style="position:relative; height:320px;">
-                    <canvas id="canvasEEGPrueba"></canvas>
-                    <div id="loaderEEGPrueba" class="position-absolute top-50 start-50 translate-middle text-center">
-                        <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
-                        <p class="small text-muted mb-0">Cargando señales EEG...</p>
+              <div class="row gx-4">
+                <div class="col-md-6 border-end">
+                  <div class="mb-2 d-flex align-items-center justify-content-between">
+                    <div>
+                      <h5 class="fw-bold text-dark mb-0"><i class="ri-cpu-line me-2 text-primary"></i>Dispositivo</h5>
+                      <p class="text-muted small mb-0">Equipo seleccionado.</p>
                     </div>
+
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-primary btn-sm rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                        type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                        style="width: 32px; height: 32px; padding: 0;">
+                        <i class="ri-add-line fw-bold" style="font-size: 1.2rem;"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end p-2 shadow-lg border-0"
+                        style="width: 280px; max-height: 350px; overflow-y: auto;">
+                        <h6 class="dropdown-header border-bottom mb-2">Seleccionar Dispositivo</h6>
+                        <div id="itemsDispositivosDisponibles"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="contenedorChecksDinamicos" class="row gx-2 gy-2 mb-3">
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-  <div class="modal fade" id="modalEditar" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content border-0 shadow-lg">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title fw-bold">Actualizar Datos Personales</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body p-4">
-          <form id="formEdit">
-            <div class="row gx-3">
-              <div class="col-md-12 mb-3">
-                <label class="form-label small fw-bold">Nombre</label>
-                <input type="text" id="editNombre" class="form-control">
-              </div>
-              
-              <div class="col-md-6 mb-3">
-                <label class="form-label small fw-bold">Fecha de Nacimiento</label>
-                <input type="date" id="editFecha" class="form-control">
-                <span class="text-danger small d-none" id="editFechaError"></span>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label class="form-label small fw-bold">Género</label>
-                <select id="editSexo" class="form-select">
-                  <option value="Masculino">Masculino</option>
-                  <option value="Femenino">Femenino</option>
-                </select>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label class="form-label small fw-bold">Sangre</label>
-                <input type="text" id="editSangre" class="form-control">
-              </div>
-              <div class="col-md-4 mb-3">
-                <label class="form-label small fw-bold">Médico Asignado</label>
-                <select id="editMedico" class="form-select" disabled></select>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label small fw-bold">CURP</label>
-                <input type="text" id="editCurp" class="form-control">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label small fw-bold">Teléfono</label>
-                <input type="text" id="editTelefono" class="form-control">
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary px-5" id="btnGuardar">Actualizar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                <div class="col-md-6">
+                  <div class="mb-2 d-flex align-items-start justify-content-between px-md-2">
+                    <div>
+                      <h5 class="fw-bold text-dark mb-0"><i class="ri-flask-line me-2 text-primary"></i>Pruebas</h5>
+                      <p class="text-muted small mb-0">Protocolo actual.</p>
+                    </div>
 
-  <!-- ============================================================
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-outline-primary btn-sm rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                        type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                        style="width: 32px; height: 32px; padding: 0;">
+                        <i class="ri-add-line fw-bold" style="font-size: 1.2rem;"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end p-2 shadow-lg border-0"
+                        style="width: 280px; max-height: 350px; overflow-y: auto;">
+                        <h6 class="dropdown-header border-bottom mb-2">Seleccionar Prueba</h6>
+                        <div id="itemsPruebasDisponibles"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="contenedorPruebasDinamicas" class="row gx-2 gy-2 mb-3 px-md-2"
+                    style="max-height: 200px; overflow-y: auto; overflow-x: hidden;">
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-muted small text-center mb-0 mt-3"><i class="ri-information-line"></i> Se requiere 1
+                dispositivo y 1 prueba para comenzar.</p>
+
+              <div class="d-flex justify-content-end mb-2">
+                <button id="btnIniciarSesion"
+                  class="btn shadow-sm d-inline-flex align-items-center justify-content-center fw-bold py-2 px-4"
+                  style="background-color: var(--accent-color); color: white; border-radius: 10px; border: none; transition: all 0.3s ease; font-size: 0.85rem;">
+                  <i class="ri-play-circle-fill me-2 fs-5"></i>
+                  INICIAR SESIÓN
+                </button>
+              </div>
+
+              <hr class="my-3 opacity-25">
+
+              <h5 class="fw-bold text-dark mb-3">
+                <i class="ri-history-line me-2 text-primary"></i>Historial de Sesiones EEG
+              </h5>
+
+              <div class="table-responsive tabla-scroll-sesiones">
+                <table class="table table-sesiones table-hover align-middle bg-white mb-0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Fecha y Hora</th>
+                      <th>Dispositivo</th>
+                      <th>Duración</th>
+                      <th class="text-center">Pruebas</th>
+                      <th>Pronóstico</th>
+                      <th>Probabilidad</th>
+                      <th class="text-center">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tablaSesionesBody">
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal fade" id="modalResumen" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-dark text-white d-print-none">
+                      <h5 class="modal-title"><i class="ri-printer-line me-2"></i>Vista Previa de Reporte</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body p-0" id="cuerpoModalResumen">
+                      <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <p class="mt-2 text-muted">Generando informe médico...</p>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer bg-light d-print-none">
+                      <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-success shadow-sm px-4" id="btnDescargarCSV">
+                        <i class="ri-file-chart-line me-1"></i> Descargar CSV
+                      </button>
+                      <button type="button" class="btn btn-primary shadow-sm px-4" id="btnDescargarPDF">
+                        <i class="ri-file-pdf-line me-1"></i> Descargar PDF
+                      </button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal de la gráfica EEG aislada de una sola prueba (se abre desde el ícono del ojo) -->
+              <div class="modal fade" id="modalEEGPrueba" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tituloModalEEGPrueba">EEG de la prueba</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="reporte-grafica-wrap" style="position:relative; height:320px;">
+                        <canvas id="canvasEEGPrueba"></canvas>
+                        <div id="loaderEEGPrueba"
+                          class="position-absolute top-50 start-50 translate-middle text-center">
+                          <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                          <p class="small text-muted mb-0">Cargando señales EEG...</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="modalEditar" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-primary text-white">
+                      <h5 class="modal-title fw-bold">Actualizar Datos Personales</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                      <form id="formEdit">
+                        <div class="row gx-3">
+                          <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold">Nombre</label>
+                            <input type="text" id="editNombre" class="form-control">
+                          </div>
+
+                          <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold">Fecha de Nacimiento</label>
+                            <input type="date" id="editFecha" class="form-control">
+                            <span class="text-danger small d-none" id="editFechaError"></span>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label class="form-label small fw-bold">Género</label>
+                            <select id="editSexo" class="form-select">
+                              <option value="Masculino">Masculino</option>
+                              <option value="Femenino">Femenino</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label class="form-label small fw-bold">Sangre</label>
+                            <input type="text" id="editSangre" class="form-control">
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <label class="form-label small fw-bold">Médico Asignado</label>
+                            <select id="editMedico" class="form-select" disabled></select>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold">CURP</label>
+                            <input type="text" id="editCurp" class="form-control">
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold">Teléfono</label>
+                            <input type="text" id="editTelefono" class="form-control">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary px-4"
+                        data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-primary px-5" id="btnGuardar">Actualizar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ============================================================
        PLANTILLAS (usadas por paciente-perfil.js, historial-sesiones.js,
        reportes-sesion.js y reportes-pdf.js)-->
 
-  <template id="tplItemDropdownDispositivo">
-    <div class="dropdown-device-item p-1">
-      <div class="form-check d-flex align-items-center m-0">
-        <input class="form-check-input check-dispositivo-dinamico me-2" type="radio" name="radioDispositivo">
-        <label class="form-check-label small fw-bold text-dark w-100 campo-nombre" style="cursor:pointer"></label>
-      </div>
-    </div>
-  </template>
-
-  <template id="tplCardDispositivoAsignado">
-    <div class="col-12">
-      <div class="border rounded-3 p-2 d-flex align-items-center bg-white shadow-sm mb-2" style="font-size: 0.8rem; border-left: 3px solid var(--accent-color);">
-        <img class="rounded me-2 campo-foto" style="width:25px; height:25px; object-fit:cover;">
-        <span class="fw-bold text-dark flex-grow-1 text-truncate campo-nombre"></span>
-        <i class="ri-checkbox-circle-fill fs-5" style="color: var(--accent-color);"></i>
-      </div>
-    </div>
-  </template>
-
-  <template id="tplCardDispositivoSesion">
-    <div class="col-4">
-      <div class="card-dispositivo-mini d-block shadow-sm p-0" style="border: 2px solid var(--accent-color);">
-        <img class="img-card-small campo-foto">
-        <div class="p-2 text-center">
-          <h6 class="text-mini fw-bold text-dark text-truncate mb-0 campo-nombre"></h6>
-          <small class="text-success" style="font-size:0.6rem; text-transform: uppercase;">Seleccionado <i class="ri-check-line"></i></small>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template id="tplItemDropdownPrueba">
-    <div class="px-3 py-1 custom-check-container">
-      <div class="form-check d-flex align-items-center m-0">
-        <input class="form-check-input check-prueba-dinamica me-2" type="checkbox" style="cursor: pointer;">
-        <label class="form-check-label small fw-bold text-dark w-100 campo-nombre" style="cursor: pointer; user-select: none;"></label>
-      </div>
-    </div>
-  </template>
-
-  <template id="tplCardPruebaAsignada">
-    <div class="col-12">
-      <div class="border rounded-3 p-2 d-flex align-items-center bg-white shadow-sm mb-2" style="font-size: 0.8rem; border-left: 3px solid var(--accent-color) !important;">
-        <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width:25px; height:25px;">
-          <i class="ri-flask-line" style="font-size: 12px;"></i>
-        </div>
-        <span class="fw-bold text-dark flex-grow-1 text-truncate campo-nombre"></span>
-        <i class="ri-checkbox-circle-fill fs-5" style="color: var(--accent-color);"></i>
-      </div>
-    </div>
-  </template>
-
-<!-- Modal para realizar/actualizar el pronóstico de una sesión (se abre desde el ícono del cerebro) -->
-<div class="modal fade" id="modalPronostico" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title fw-bold"><i class="ri-brain-line me-2"></i>Realizar pronóstico de esta sesión</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body p-4">
-                <p class="text-muted small mb-3">Sesión <b id="idSesionPronostico"></b> — selecciona el resultado del pronóstico:</p>
-                <div class="form-check mb-2 p-3 border rounded-3">
-                    <input class="form-check-input" type="checkbox" name="opcionPronostico" id="checkSinTDAH">
-                    <label class="form-check-label fw-bold text-dark" for="checkSinTDAH">Sin TDAH</label>
+              <template id="tplItemDropdownDispositivo">
+                <div class="dropdown-device-item p-1">
+                  <div class="form-check d-flex align-items-center m-0">
+                    <input class="form-check-input check-dispositivo-dinamico me-2" type="radio"
+                      name="radioDispositivo">
+                    <label class="form-check-label small fw-bold text-dark w-100 campo-nombre"
+                      style="cursor:pointer"></label>
+                  </div>
                 </div>
-                <div class="form-check p-3 border rounded-3">
-                    <input class="form-check-input" type="checkbox" name="opcionPronostico" id="checkTDAHDetectado">
-                    <label class="form-check-label fw-bold text-dark" for="checkTDAHDetectado">TDAH Detectado</label>
+              </template>
+
+              <template id="tplCardDispositivoAsignado">
+                <div class="col-12">
+                  <div class="border rounded-3 p-2 d-flex align-items-center bg-white shadow-sm mb-2"
+                    style="font-size: 0.8rem; border-left: 3px solid var(--accent-color);">
+                    <img class="rounded me-2 campo-foto" style="width:25px; height:25px; object-fit:cover;">
+                    <span class="fw-bold text-dark flex-grow-1 text-truncate campo-nombre"></span>
+                    <i class="ri-checkbox-circle-fill fs-5" style="color: var(--accent-color);"></i>
+                  </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary px-4" id="btnGuardarPronostico">Guardar pronóstico</button>
-            </div>
-        </div>
-    </div>
-</div>
+              </template>
 
-  <template id="tplFilaSesion">
-    <tr>
-      <td><b class="text-primary campo-id"></b></td>
-      <td class="campo-fecha"></td>
-      <td>
-        <div class="d-flex align-items-center">
-          <i class="ri-cpu-line me-2 text-primary" style="font-size: 1.1rem;"></i>
-          <span class="fw-bold text-dark campo-dispositivo" style="font-size: 0.85rem;"></span>
-        </div>
-      </td>
-      <td class="campo-duracion"></td>
-      <td class="text-center">
-        <span class="fw-bold text-dark campo-total-pruebas"></span>
-      </td>
-      <td>
-        <span class="badge campo-badge-diagnostico"></span>
-      </td>
-      <td class="text-center">
-        <div class="d-flex align-items-center justify-content-center gap-2">
-          <button type="button" class="btn btn-sm btn-outline-warning border-0 p-1 btn-reanudar-sesion invisible" title="Reanudar sesión (faltan pruebas)">
-            <i class="ri-play-circle-line fs-5"></i>
-          </button>
-          <button type="button" class="btn btn-sm btn-outline-primary border-0 p-1 btn-ver-resumen" title="Ver resumen">
-            <i class="ri-eye-line fs-5"></i>
-          </button>
-          <button type="button" class="btn btn-sm btn-outline-info border-0 p-1 btn-realizar-pronostico" title="Realizar pronóstico">
-            <i class="ri-brain-line fs-5"></i>
-          </button>
-          <button type="button" class="btn btn-sm btn-outline-danger border-0 p-1 btn-eliminar-sesion" title="Eliminar sesión">
-            <i class="ri-delete-bin-line fs-5"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
-  </template>
+              <template id="tplCardDispositivoSesion">
+                <div class="col-4">
+                  <div class="card-dispositivo-mini d-block shadow-sm p-0"
+                    style="border: 2px solid var(--accent-color);">
+                    <img class="img-card-small campo-foto">
+                    <div class="p-2 text-center">
+                      <h6 class="text-mini fw-bold text-dark text-truncate mb-0 campo-nombre"></h6>
+                      <small class="text-success" style="font-size:0.6rem; text-transform: uppercase;">Seleccionado <i
+                          class="ri-check-line"></i></small>
+                    </div>
+                  </div>
+                </div>
+              </template>
 
-  <template id="tplFilaSesionVacia">
-    <tr><td colspan="7" class="text-center py-4 text-muted">Sin sesiones registradas.</td></tr>
-  </template>
+              <template id="tplItemDropdownPrueba">
+                <div class="px-3 py-1 custom-check-container">
+                  <div class="form-check d-flex align-items-center m-0">
+                    <input class="form-check-input check-prueba-dinamica me-2" type="checkbox" style="cursor: pointer;">
+                    <label class="form-check-label small fw-bold text-dark w-100 campo-nombre"
+                      style="cursor: pointer; user-select: none;"></label>
+                  </div>
+                </div>
+              </template>
 
-  <template id="tplBandaCard">
-    <div class="reporte-banda">
-      <div class="reporte-banda-icono campo-icono"></div>
-      <div class="reporte-banda-cuerpo">
-        <div class="reporte-banda-encabezado">
-          <span class="reporte-banda-nombre campo-nombre"></span>
-          <span class="reporte-banda-valor campo-valor"></span>
-        </div>
-        <div class="reporte-banda-pista">
-          <div class="reporte-banda-relleno campo-relleno"></div>
-        </div>
-      </div>
-    </div>
-  </template>
+              <template id="tplCardPruebaAsignada">
+                <div class="col-12">
+                  <div class="border rounded-3 p-2 d-flex align-items-center bg-white shadow-sm mb-2"
+                    style="font-size: 0.8rem; border-left: 3px solid var(--accent-color) !important;">
+                    <div
+                      class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center me-2"
+                      style="width:25px; height:25px;">
+                      <i class="ri-flask-line" style="font-size: 12px;"></i>
+                    </div>
+                    <span class="fw-bold text-dark flex-grow-1 text-truncate campo-nombre"></span>
+                    <i class="ri-checkbox-circle-fill fs-5" style="color: var(--accent-color);"></i>
+                  </div>
+                </div>
+              </template>
 
-  <template id="tplFilaDetallePrueba">
-    <tr>
-      <td class="fw-bold ps-3 campo-nombre"></td>
-      <td class="text-center text-muted campo-inicio"></td>
-      <td class="text-center text-muted campo-fin"></td>
-      <td class="text-center fw-bold text-primary campo-duracion"></td>
-      <td class="text-center campo-theta"></td>
-      <td class="text-center campo-alpha"></td>
-      <td class="text-center campo-beta"></td>
-      <td class="text-center">
-        <button type="button" class="btn btn-sm btn-link p-0 me-2 btn-ver-eeg-prueba" title="Ver EEG de esta prueba"><i class="ri-eye-line"></i></button>
-        <button type="button" class="btn btn-sm btn-link p-0 btn-descargar-csv-prueba" title="Descargar CSV de esta prueba"><i class="ri-download-2-line"></i></button>
-      </td>
-    </tr>
-  </template>
+              <!-- Modal para realizar/actualizar el pronóstico de una sesión (se abre desde el ícono del cerebro) -->
+              <div class="modal fade" id="modalPronostico" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header bg-primary text-white">
+                      <h5 class="modal-title fw-bold"><i class="ri-brain-line me-2"></i>Realizar pronóstico de esta
+                        sesión</h5>
+                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                      <p class="text-muted small mb-3">Sesión <b id="idSesionPronostico"></b> — Da clic en el
+                        bot&oacute;n para realizar la predicci&oacute;n:</p>
+                      <div hidden class="form-check mb-2 p-3 border rounded-3">
+                        <input hidden disabled class="form-check-input" type="checkbox" name="opcionPronostico"
+                          id="checkSinTDAH">
+                        <label hidden disabled class="form-check-label fw-bold text-dark" for="checkSinTDAH">Sin
+                          TDAH</label>
+                      </div>
+                      <div hidden class="form-check p-3 border rounded-3">
+                        <input hidden disabled class="form-check-input" type="checkbox" name="opcionPronostico"
+                          id="checkTDAHDetectado">
+                        <label hidden disabled class="form-check-label fw-bold text-dark" for="checkTDAHDetectado">TDAH
+                          Detectado</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary px-4"
+                        data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary px-4" id="btnGuardarPronostico">Realizar y guardar
+                        pronóstico</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-  <template id="tplFilaDetalleVacia">
-    <tr><td colspan="8" class="text-center py-3">Sin registros.</td></tr>
-  </template>
-
-  <template id="tplModalResumen">
-    <div class="reporte-clinico">
-
-      <!-- Membrete -->
-      <div class="reporte-membrete">
-        <div class="reporte-marca">
-          <img src="assets/images/logoTDHA.png" class="reporte-logo" onerror="this.onerror=null; this.src='assets/images/logo.png';">
-          <div>
-            <h3 class="reporte-titulo">DETEC <span>TDAH</span></h3>
-            <p class="reporte-subtitulo">Informe de Sesión</p>
-          </div>
-        </div>
-        <div class="reporte-folio-box">
-          <span class="reporte-folio-label">Folio de sesión</span>
-          <span class="reporte-folio-valor campo-id-sesion"></span>
-          <span class="reporte-folio-fecha campo-fecha-sesion"></span>
-        </div>
-      </div>
-
-      <!-- Tarjeta: franja de datos generales, con ícono arriba de cada dato -->
-      <div class="reporte-card">
-        <div class="reporte-franja">
-          <div class="reporte-dato">
-            <i class="ri-user-3-line reporte-dato-icono"></i>
-            <span class="reporte-dato-label">Paciente</span>
-            <span class="reporte-dato-valor campo-nombre-paciente"></span>
-          </div>
-          <div class="reporte-dato reporte-dato-angosto">
-            <i class="ri-calendar-line reporte-dato-icono"></i>
-            <span class="reporte-dato-label">Edad</span>
-            <span class="reporte-dato-valor campo-edad-paciente"></span>
-          </div>
-          <div class="reporte-dato">
-            <i class="ri-stethoscope-line reporte-dato-icono"></i>
-            <span class="reporte-dato-label">Médico responsable</span>
-            <span class="reporte-dato-valor campo-medico-paciente"></span>
-          </div>
-          <div class="reporte-dato">
-            <i class="ri-router-line reporte-dato-icono"></i>
-            <span class="reporte-dato-label">Dispositivo</span>
-            <span class="reporte-dato-valor campo-dispositivo-sesion"></span>
-          </div>
-          <div class="reporte-dato reporte-dato-angosto">
-            <i class="ri-time-line reporte-dato-icono"></i>
-            <span class="reporte-dato-label">Duración</span>
-            <span class="reporte-dato-valor campo-duracion-sesion"></span>
-          </div>
-          <div class="reporte-dato reporte-dato-diagnostico">
-            <span class="reporte-dato-label">Diagnóstico</span>
-            <span class="badge rounded-pill campo-badge-diagnostico"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="reporte-alerta seccion-alerta-interrupcion d-none mb-2">
-        <i class="ri-error-warning-line"></i>
-        <div>
-          <p class="reporte-alerta-titulo">Se detectó una interrupción de señal durante esta sesión</p>
-          <p class="reporte-alerta-texto">Los datos pueden tener huecos en el tramo donde se perdió la conexión. Interpretar los promedios con esa consideración.</p>
-        </div>
-      </div>
-
-      <!-- Tarjeta: gráfica a todo lo ancho -->
-      <div class="reporte-card">
-        <div class="reporte-seccion-titulo-central"><span>Evolución de Ondas Cerebrales</span></div>
-        <div class="reporte-grafica-wrap">
-          <canvas id="canvasGraficaReporte"></canvas>
-          <div id="loaderGrafica" class="position-absolute top-50 start-50 translate-middle text-center">
-            <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
-            <p class="small text-muted mb-0">Cargando señales EEG...</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dos columnas: promedios | desglose de pruebas -->
-      <div class="reporte-fila-dos-columnas mb-2">
-        <div class="reporte-card reporte-col-bandas">
-          <h6 class="reporte-seccion-titulo">Promedios de la Sesión</h6>
-          <div class="contenedor-bandas"></div>
-        </div>
-
-        <div class="reporte-card reporte-col-principal">
-          <h6 class="reporte-seccion-titulo">Desglose de Pruebas</h6>
-          <div class="table-responsive">
-            <table class="reporte-tabla">
-              <thead>
+              <template id="tplFilaSesion">
                 <tr>
-                  <th>Prueba</th>
-                  <th class="text-center">Inicio</th>
-                  <th class="text-center">Fin</th>
-                  <th class="text-center">Duración</th>
-                  <th class="text-center col-theta">Theta</th>
-                  <th class="text-center col-alpha">Alpha</th>
-                  <th class="text-center col-beta">Beta</th>
-                  <th class="text-center">Acciones</th>
+                  <td><b class="text-primary campo-id"></b></td>
+                  <td class="campo-fecha"></td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <i class="ri-cpu-line me-2 text-primary" style="font-size: 1.1rem;"></i>
+                      <span class="fw-bold text-dark campo-dispositivo" style="font-size: 0.85rem;"></span>
+                    </div>
+                  </td>
+                  <td class="campo-duracion"></td>
+                  <td class="text-center">
+                    <span class="fw-bold text-dark campo-total-pruebas"></span>
+                  </td>
+                  <td>
+                    <span class="campo-badge-diagnostico"></span>
+                  </td>
+                  <td>
+                    <span class="campo-probabilidad"></span>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-flex align-items-center justify-content-center gap-2">
+                      <button type="button"
+                        class="btn btn-sm btn-outline-warning border-0 p-1 btn-reanudar-sesion invisible"
+                        title="Reanudar sesión (faltan pruebas)">
+                        <i class="ri-play-circle-line fs-5"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline-primary border-0 p-1 btn-ver-resumen"
+                        title="Ver resumen">
+                        <i class="ri-eye-line fs-5"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline-info border-0 p-1 btn-realizar-pronostico"
+                        title="Realizar pronóstico">
+                        <i class="ri-brain-line fs-5"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline-danger border-0 p-1 btn-eliminar-sesion"
+                        title="Eliminar sesión">
+                        <i class="ri-delete-bin-line fs-5"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody class="contenedor-detalles-pruebas"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+              </template>
 
-      <!-- Comentario clínico -->
-      <div class="reporte-card reporte-comentario">
-        <h6 class="reporte-seccion-titulo">Comentario Clínico</h6>
-        <div class="d-flex gap-2 align-items-start">
-          <textarea class="form-control campo-comentario" rows="2" placeholder="Sin comentarios para esta sesión."></textarea>
-          <button type="button" class="btn btn-sm flex-shrink-0 btn-guardar-comentario" style="background: var(--rc-blue); color:#fff; border:none; border-radius:10px; font-weight:700; padding: 8px 18px;">
-            <i class="ri-save-line me-1"></i> Guardar
-          </button>
-        </div>
-        <svg class="reporte-comentario-marca-agua" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M32 6C20 6 12 14 12 24c0 6 3 10 3 14 0 4-3 6-3 10 0 6 6 8 8 8 0 4 4 6 8 6 3 0 5-1 6-3 1 2 3 3 6 3 4 0 8-2 8-6 2 0 8-2 8-8 0-4-3-6-3-10 0-4 3-8 3-14C53 14 44 6 32 6Z" stroke="currentColor" stroke-width="2"/>
-          <path d="M24 20c2 4 2 8 0 12M32 16v32M40 20c-2 4-2 8 0 12" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </div>
-    </div>
-  </template>
+              <template id="tplFilaSesionVacia">
+                <tr>
+                  <td colspan="7" class="text-center py-4 text-muted">Sin sesiones registradas.</td>
+                </tr>
+              </template>
 
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="js/shared/layout.js"></script>
-  <script src="js/shared/temas.js"></script>
-  <script src="assets/js/chart.min.js"></script>
-  <script src="assets/js/chartjs-plugin-annotation.min.js"></script>
-  <script src="./node_modules/jspdf/dist/jspdf.umd.min.js"></script>
-  <script src="./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
-  <script src="js/pages/perfil-pacientes/paciente-perfil.js"></script>
-  <script src="js/pages/perfil-pacientes/historial-sesiones.js"></script>
-  <script src="js/pages/perfil-pacientes/reportes-sesion.js"></script>
-  <script src="js/pages/perfil-pacientes/reportes-pdf.js"></script>
+              <template id="tplBandaCard">
+                <div class="reporte-banda">
+                  <div class="reporte-banda-icono campo-icono"></div>
+                  <div class="reporte-banda-cuerpo">
+                    <div class="reporte-banda-encabezado">
+                      <span class="reporte-banda-nombre campo-nombre"></span>
+                      <span class="reporte-banda-valor campo-valor"></span>
+                    </div>
+                    <div class="reporte-banda-pista">
+                      <div class="reporte-banda-relleno campo-relleno"></div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tplFilaDetallePrueba">
+                <tr>
+                  <td class="fw-bold ps-3 campo-nombre"></td>
+                  <td class="text-center text-muted campo-inicio"></td>
+                  <td class="text-center text-muted campo-fin"></td>
+                  <td class="text-center fw-bold text-primary campo-duracion"></td>
+                  <td class="text-center campo-theta"></td>
+                  <td class="text-center campo-alpha"></td>
+                  <td class="text-center campo-beta"></td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-sm btn-link p-0 me-2 btn-ver-eeg-prueba"
+                      title="Ver EEG de esta prueba"><i class="ri-eye-line"></i></button>
+                    <button type="button" class="btn btn-sm btn-link p-0 btn-descargar-csv-prueba"
+                      title="Descargar CSV de esta prueba"><i class="ri-download-2-line"></i></button>
+                  </td>
+                </tr>
+              </template>
+
+              <template id="tplFilaDetalleVacia">
+                <tr>
+                  <td colspan="8" class="text-center py-3">Sin registros.</td>
+                </tr>
+              </template>
+
+              <template id="tplModalResumen">
+                <div class="reporte-clinico">
+
+                  <!-- Membrete -->
+                  <div class="reporte-membrete">
+                    <div class="reporte-marca">
+                      <img src="assets/images/logoTDHA.png" class="reporte-logo"
+                        onerror="this.onerror=null; this.src='assets/images/logo.png';">
+                      <div>
+                        <h3 class="reporte-titulo">DETEC <span>TDAH</span></h3>
+                        <p class="reporte-subtitulo">Informe de Sesión</p>
+                      </div>
+                    </div>
+                    <div class="reporte-folio-box">
+                      <span class="reporte-folio-label">Folio de sesión</span>
+                      <span class="reporte-folio-valor campo-id-sesion"></span>
+                      <span class="reporte-folio-fecha campo-fecha-sesion"></span>
+                    </div>
+                  </div>
+
+                  <!-- Tarjeta: franja de datos generales, con ícono arriba de cada dato -->
+                  <div class="reporte-card">
+                    <div class="reporte-franja">
+                      <div class="reporte-dato">
+                        <i class="ri-user-3-line reporte-dato-icono"></i>
+                        <span class="reporte-dato-label">Paciente</span>
+                        <span class="reporte-dato-valor campo-nombre-paciente"></span>
+                      </div>
+                      <div class="reporte-dato reporte-dato-angosto">
+                        <i class="ri-calendar-line reporte-dato-icono"></i>
+                        <span class="reporte-dato-label">Edad</span>
+                        <span class="reporte-dato-valor campo-edad-paciente"></span>
+                      </div>
+                      <div class="reporte-dato">
+                        <i class="ri-stethoscope-line reporte-dato-icono"></i>
+                        <span class="reporte-dato-label">Médico responsable</span>
+                        <span class="reporte-dato-valor campo-medico-paciente"></span>
+                      </div>
+                      <div class="reporte-dato">
+                        <i class="ri-router-line reporte-dato-icono"></i>
+                        <span class="reporte-dato-label">Dispositivo</span>
+                        <span class="reporte-dato-valor campo-dispositivo-sesion"></span>
+                      </div>
+                      <div class="reporte-dato reporte-dato-angosto">
+                        <i class="ri-time-line reporte-dato-icono"></i>
+                        <span class="reporte-dato-label">Duración</span>
+                        <span class="reporte-dato-valor campo-duracion-sesion"></span>
+                      </div>
+                      <div class="reporte-dato reporte-dato-diagnostico">
+                        <span class="reporte-dato-label">Diagnóstico</span>
+                        <span class="badge rounded-pill campo-badge-diagnostico"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="reporte-alerta seccion-alerta-interrupcion d-none mb-2">
+                    <i class="ri-error-warning-line"></i>
+                    <div>
+                      <p class="reporte-alerta-titulo">Se detectó una interrupción de señal durante esta sesión</p>
+                      <p class="reporte-alerta-texto">Los datos pueden tener huecos en el tramo donde se perdió la
+                        conexión. Interpretar los promedios con esa consideración.</p>
+                    </div>
+                  </div>
+
+                  <!-- Tarjeta: gráfica a todo lo ancho -->
+                  <div class="reporte-card">
+                    <div class="reporte-seccion-titulo-central"><span>Evolución de Ondas Cerebrales</span></div>
+                    <div class="reporte-grafica-wrap">
+                      <canvas id="canvasGraficaReporte"></canvas>
+                      <div id="loaderGrafica" class="position-absolute top-50 start-50 translate-middle text-center">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                        <p class="small text-muted mb-0">Cargando señales EEG...</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Dos columnas: promedios | desglose de pruebas -->
+                  <div class="reporte-fila-dos-columnas mb-2">
+                    <div class="reporte-card reporte-col-bandas">
+                      <h6 class="reporte-seccion-titulo">Promedios de la Sesión</h6>
+                      <div class="contenedor-bandas"></div>
+                    </div>
+
+                    <div class="reporte-card reporte-col-principal">
+                      <h6 class="reporte-seccion-titulo">Desglose de Pruebas</h6>
+                      <div class="table-responsive">
+                        <table class="reporte-tabla">
+                          <thead>
+                            <tr>
+                              <th>Prueba</th>
+                              <th class="text-center">Inicio</th>
+                              <th class="text-center">Fin</th>
+                              <th class="text-center">Duración</th>
+                              <th class="text-center col-theta">Theta</th>
+                              <th class="text-center col-alpha">Alpha</th>
+                              <th class="text-center col-beta">Beta</th>
+                              <th class="text-center">Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody class="contenedor-detalles-pruebas"></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Comentario clínico -->
+                  <div class="reporte-card reporte-comentario">
+                    <h6 class="reporte-seccion-titulo">Comentario Clínico</h6>
+                    <div class="d-flex gap-2 align-items-start">
+                      <textarea class="form-control campo-comentario" rows="2"
+                        placeholder="Sin comentarios para esta sesión."></textarea>
+                      <button type="button" class="btn btn-sm flex-shrink-0 btn-guardar-comentario"
+                        style="background: var(--rc-blue); color:#fff; border:none; border-radius:10px; font-weight:700; padding: 8px 18px;">
+                        <i class="ri-save-line me-1"></i> Guardar
+                      </button>
+                    </div>
+                    <svg class="reporte-comentario-marca-agua" viewBox="0 0 64 64" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M32 6C20 6 12 14 12 24c0 6 3 10 3 14 0 4-3 6-3 10 0 6 6 8 8 8 0 4 4 6 8 6 3 0 5-1 6-3 1 2 3 3 6 3 4 0 8-2 8-6 2 0 8-2 8-8 0-4-3-6-3-10 0-4 3-8 3-14C53 14 44 6 32 6Z"
+                        stroke="currentColor" stroke-width="2" />
+                      <path d="M24 20c2 4 2 8 0 12M32 16v32M40 20c-2 4-2 8 0 12" stroke="currentColor"
+                        stroke-width="2" />
+                    </svg>
+                  </div>
+                </div>
+              </template>
+
+              <script src="assets/js/jquery.min.js"></script>
+              <script src="assets/js/bootstrap.bundle.min.js"></script>
+              <script src="js/shared/layout.js"></script>
+              <script src="js/shared/temas.js"></script>
+              <script src="assets/js/chart.min.js"></script>
+              <script src="assets/js/chartjs-plugin-annotation.min.js"></script>
+              <script src="./node_modules/jspdf/dist/jspdf.umd.min.js"></script>
+              <script src="./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"></script>
+              <script src="js/pages/perfil-pacientes/paciente-perfil.js"></script>
+              <script src="js/pages/perfil-pacientes/historial-sesiones.js"></script>
+              <script src="js/pages/perfil-pacientes/reportes-sesion.js"></script>
+              <script src="js/pages/perfil-pacientes/reportes-pdf.js"></script>
 </body>
+
 </html>

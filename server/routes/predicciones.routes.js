@@ -24,7 +24,7 @@ for (const ch of CH_SUFFIXES) {
 // TODO: si config/onnx_models.js ya expone este mapeo (recomendado, para no
 // tener dos fuentes de verdad), importalo de ahi en vez de hardcodearlo aqui:
 //   import { session, clases } from '../config/onnx_models.js';
-const CLASES = { 0: 'Combinado', 1: 'Hiperactivo', 2: 'Inatento', 3: 'Normal' };
+export const CLASES = { 0: 'TDAH Combinado', 1: 'TDAH Hiperactivo', 2: 'TDAH Inatento', 3: 'Sin TDAH' };
 
 const RAIZ_PROYECTO = process.cwd(); // ajusta si tu proyecto define esto distinto
 

@@ -3,10 +3,14 @@ let sesionEnEdicionPronostico = null;
 function pintarBadgeDiagnostico(span, diagnostico) {
     span.textContent = diagnostico || 'Sin diagnóstico';
     span.className = 'badge campo-badge-diagnostico'; // reset de clases previas
-    if (diagnostico === 'TDAH Detectado') {
+    if (diagnostico === 'TDAH Combinado') {
         span.classList.add('bg-danger-subtle', 'text-danger');
     } else if (diagnostico === 'Sin TDAH') {
         span.classList.add('bg-success-subtle', 'text-success');
+    } else if (diagnostico === 'TDAH Inatento') {
+        span.classList.add('bg-secondary-subtle', 'text-warning');
+    } else if (diagnostico === 'TDAH Hiperactivo') {
+        span.classList.add('bg-secondary-subtle', 'text-danger');
     } else {
         span.classList.add('bg-secondary-subtle', 'text-secondary');
     }
@@ -42,6 +46,8 @@ async function cargarHistorialSesiones() {
             // Si nunca se ha hecho un pronóstico, s.diagnostico debe llegar
             // como "Sin diagnóstico" (así lo guarda el backend por defecto)
             pintarBadgeDiagnostico(fila.querySelector('.campo-badge-diagnostico'), s.diagnostico);
+
+            fila.querySelector('.campo-probabilidad').textContent = (s.probability * 100).toFixed(2) + "%";
 
             fila.querySelector('.btn-ver-resumen').addEventListener('click', () => verResumen(i));
             fila.querySelector('.btn-eliminar-sesion').addEventListener('click', () => confirmarEliminarSesion(s.id_sesion));
@@ -88,8 +94,8 @@ function abrirModalPronostico(sesion) {
 
     const checkSinTDAH = document.getElementById('checkSinTDAH');
     const checkTDAHDetectado = document.getElementById('checkTDAHDetectado');
-    checkSinTDAH.checked = sesion.diagnostico === 'Sin TDAH';
-    checkTDAHDetectado.checked = sesion.diagnostico === 'TDAH Detectado';
+    //checkSinTDAH.checked = sesion.diagnostico === 'Sin TDAH';
+    //checkTDAHDetectado.checked = sesion.diagnostico === 'TDAH Detectado';
 
     const modal = new bootstrap.Modal(document.getElementById('modalPronostico'));
     modal.show();
@@ -116,12 +122,15 @@ document.getElementById('btnGuardarPronostico').addEventListener('click', async 
     if (checkSinTDAH) diagnostico = 'Sin TDAH';
     else if (checkTDAHDetectado) diagnostico = 'TDAH Detectado';
 
-    await guardarDiagnosticoSesion(sesionEnEdicionPronostico, diagnostico);
+    const data = await guardarDiagnosticoSesion(sesionEnEdicionPronostico, diagnostico);
+
+    diagnostico = data.clase;
 
     // Refresca el badge de esa fila sin recargar toda la tabla
     const fila = [...document.querySelectorAll('#tablaSesionesBody tr')]
         .find(tr => tr.querySelector('.campo-id')?.textContent === `#${sesionEnEdicionPronostico.id_sesion}`);
     if (fila) pintarBadgeDiagnostico(fila.querySelector('.campo-badge-diagnostico'), diagnostico);
+    if (fila) fila.querySelector('.campo-probabilidad').textContent = (data.prob * 100).toFixed(2) + "%";
 
     bootstrap.Modal.getInstance(document.getElementById('modalPronostico')).hide();
     sesionEnEdicionPronostico = null;
@@ -148,6 +157,7 @@ async function guardarDiagnosticoSesion(sesion, diagnostico) {
         // Refrescamos el resumen de "último resultado" del paciente,
         // por si esta era su sesión más reciente
         obtenerUltimoResultadoIA();
+        return data;
     } catch (e) {
         console.error("Error al guardar diagnóstico:", e);
         alert('Error de conexión al guardar el diagnóstico.');

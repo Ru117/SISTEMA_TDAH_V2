@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { pool } from '../config/db.js';
 import { uploadCSV } from '../middlewares/upload.js';
 import { manejarErrorServidor } from '../middlewares/manejarError.js';
+import { CLASES } from './predicciones.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -131,7 +132,7 @@ router.post(
                         // ANTES asumía posición == índice, se desalineaba si el frontend saltaba una prueba sin CSV
                         const archivoDeEstaPrueba = mapaIndiceArchivo
                             ? (mapaIndiceArchivo.get(i) || null)
-                            : (archivosCSVPruebas[i] || null); 
+                            : (archivosCSVPruebas[i] || null);
 
                         const rutaCSVPrueba = archivoDeEstaPrueba ? `uploads/${archivoDeEstaPrueba.filename}` : null;
 
@@ -341,21 +342,38 @@ router.get('/sesiones/:id/evolucion', async (req, res) => {
 });
 
 router.put('/sesiones/:id/diagnostico', async (req, res) => {
+
     try {
         const { id } = req.params;
-        const { diagnostico, comentario } = req.body;
-        const valoresValidos = ['Sin diagnóstico', 'Sin TDAH', 'TDAH Detectado'];
+        const getPrediction = await fetch(`http://127.0.0.1:${process.env.PORT}/api/inference/predict/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const { comentario } = req.body;
+        const prediction = await getPrediction.json();
 
-        if (!valoresValidos.includes(diagnostico)) {
-            return res.status(400).json({ success: false, error: "Valor de diagnóstico no válido" });
+        if (prediction.error) {
+            return res.status(404).json({ error: prediction.error });
         }
+
+        const resultadoIA = JSON.stringify(prediction);
+        const probabilidades_promedio = prediction.probabilidades_promedio;
+
+        const [clase, prob] = Object.entries(probabilidades_promedio)
+            .reduce((max, actual) => (actual[1] > max[1] ? actual : max));
 
         if (comentario !== undefined) {
-            await pool.query('UPDATE sesiones_paciente SET diagnostico = ?, comentario = ? WHERE id_sesion = ?', [diagnostico, comentario, id]);
+            await pool.query('UPDATE sesiones_paciente SET diagnostico = ?, comentario = ?, resultado_ia = ?, probability = ?  WHERE id_sesion = ?', [clase, comentario, resultadoIA, prob, id]);
         } else {
-            await pool.query('UPDATE sesiones_paciente SET diagnostico = ? WHERE id_sesion = ?', [diagnostico, id]);
+            await pool.query('UPDATE sesiones_paciente SET diagnostico = ?, resultado_ia = ?, probability = ? WHERE id_sesion = ?', [clase, resultadoIA, prob, id]);
         }
-        res.json({ success: true });
+        res.json({
+            success: true,
+            clase,
+            prob
+        });
     } catch (error) {
         manejarErrorServidor(res, error, 'PUT /api/sesiones/:id/diagnostico');
     }
@@ -392,7 +410,7 @@ router.delete('/sesiones/:id', async (req, res) => {
             ];
 
             rutasABorrar.forEach((ruta) => {
-                const rutaCompleta = path.join(RAIZ_PROYECTO, ruta); 
+                const rutaCompleta = path.join(RAIZ_PROYECTO, ruta);
                 fs.unlink(rutaCompleta, (err) => {
                     if (err) console.error('No se pudo borrar el CSV físico:', rutaCompleta, err.message);
                 });
