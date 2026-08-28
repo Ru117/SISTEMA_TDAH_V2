@@ -1,0 +1,57 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-diana}
+      MYSQL_DATABASE: ${DB_NAME:-Proyecto_EEG}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # Coloca aquí tu dump (*.sql / *.sql.gz). Solo se ejecuta si la BD está vacía.
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${DB_PASSWORD:-diana}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: db
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-diana}
+      DB_NAME: ${DB_NAME:-Proyecto_EEG}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      APP_URL: ${APP_URL:-http://localhost:8080}
+    volumes:
+      # Volumen nombrado: en el PRIMER arranque Docker lo siembra con el
+      # contenido de /app/server/uploads que trae la imagen; luego persiste.
+      - uploads_data:/app/server/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${SERVER_PORT:-3000}:3000"
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "${CLIENT_PORT:-8080}:80"
+
+volumes:
+  db_data:
+  uploads_data:

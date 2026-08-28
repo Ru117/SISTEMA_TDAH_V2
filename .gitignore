@@ -1,0 +1,7 @@
+.env
+.DS_Store
+
+# Dumps de BD locales (no versionar datos)
+db/init/*
+!db/init/.gitkeep
+!db/init/README.md
