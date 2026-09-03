@@ -315,8 +315,52 @@ async function intentarReconexionAutomatica() {
     return false;
 }
 
+// Verifica si el navegador soporta y tiene habilitada la API Web Bluetooth
+export function verificarSoporteBluetooth() {
+    if (!navigator.bluetooth || typeof navigator.bluetooth.requestDevice !== 'function') {
+        if (!window.isSecureContext) {
+            return {
+                soportado: false,
+                mensaje: "Web Bluetooth requiere un contexto seguro (HTTPS o http://localhost)."
+            };
+        }
+        const ua = navigator.userAgent || "";
+        if (navigator.brave || ua.includes("Brave")) {
+            return {
+                soportado: false,
+                mensaje: "Brave bloquea Web Bluetooth por defecto. Habilítalo en brave://settings/content/bluetoothDevices o en brave://flags/#enable-web-bluetooth"
+            };
+        }
+        if (ua.includes("Firefox")) {
+            return {
+                soportado: false,
+                mensaje: "Firefox no soporta la API Web Bluetooth. Utiliza Google Chrome, Microsoft Edge o Chromium."
+            };
+        }
+        if (ua.includes("Linux") && (ua.includes("Chrome") || ua.includes("Chromium"))) {
+            return {
+                soportado: false,
+                mensaje: "En Chrome para Linux, Web Bluetooth viene desactivado por defecto. Abre una pestaña en chrome://flags/#enable-web-bluetooth, cámbialo a 'Enabled' y reinicia Chrome."
+            };
+        }
+        return {
+            soportado: false,
+            mensaje: "Tu navegador no tiene disponible la API Web Bluetooth. Asegúrate de usar Chrome/Edge y activar la flag chrome://flags/#enable-web-bluetooth si estás en Linux."
+        };
+    }
+    return { soportado: true };
+}
+
 // Botón "Conectar": vincula el dispositivo y arranca la grabación de datos
 document.getElementById("connect").onclick = async () => {
+    const soporte = verificarSoporteBluetooth();
+    if (!soporte.soportado) {
+        console.error("Web Bluetooth no disponible:", soporte.mensaje);
+        showStatusMessage(soporte.mensaje, "#d90429");
+        alert("⚠️ " + soporte.mensaje);
+        return;
+    }
+
     try {
         detenerAdquisicion();
         desconexionManual = false;
@@ -397,8 +441,14 @@ document.getElementById("connect").onclick = async () => {
         }
 
     } catch (e) {
-        console.error(e);
-        showStatusMessage("Error de conexión, Vuelve a vincular el dispositivo", "#d90429");
+        console.error("Error en conexión Muse:", e);
+        if (e.name === 'NotFoundError' || (e.message && e.message.includes('User cancelled'))) {
+            showStatusMessage("Vinculación cancelada o dispositivo no seleccionado", "#ff9800");
+        } else if (e.name === 'SecurityError') {
+            showStatusMessage("Permiso de Bluetooth denegado por el navegador", "#d90429");
+        } else {
+            showStatusMessage("Error de conexión, vuelve a vincular el dispositivo", "#d90429");
+        }
     }
 };
 
