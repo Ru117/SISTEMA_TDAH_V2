@@ -91,7 +91,18 @@ async function revisarSiFaltanPruebas(idSesion, dispositivoId, btnReanudar) {
 function abrirModalPronostico(sesion) {
     sesionEnEdicionPronostico = sesion;
     document.getElementById('idSesionPronostico').textContent = `#${sesion.id_sesion}`;
-
+    const testText = document.createElement("h6");
+    testText.textContent = "Pruebas realizadas:";
+    document.getElementById('idSesionPronostico').appendChild(testText);
+    if ("detalles_pruebas" in sesion) {
+        for (const prueba of sesion.detalles_pruebas) {
+            const p_prueba = document.createElement("p");
+            p_prueba.textContent = prueba.nombre;
+            document.getElementById('idSesionPronostico').appendChild(
+                p_prueba
+            );
+        }
+    }
     const checkSinTDAH = document.getElementById('checkSinTDAH');
     const checkTDAHDetectado = document.getElementById('checkTDAHDetectado');
     //checkSinTDAH.checked = sesion.diagnostico === 'Sin TDAH';
@@ -146,8 +157,17 @@ async function guardarDiagnosticoSesion(sesion, diagnostico) {
             body: JSON.stringify({ diagnostico })
         });
         const data = await res.json();
+        Swal.fire({
+            title: data.success ? "Predicción generada correctamente" : "Error al generar la predicción",
+            icon: data.success ? "success" : "error",
+            showConfirmButton: false,
+            timer: 2000,
+            text: data.success ? `La probabilidad de tener ${data.clase} es del ${(data.prob * 100).toFixed(2)}%` : data.error || "Error desconocido"
+        });
+        bootstrap.Modal.getInstance(document.getElementById('modalPronostico')).hide();
+
         if (!data.success) {
-            alert('No se pudo guardar el diagnóstico: ' + (data.error || 'error desconocido'));
+            //alert('No se pudo guardar el diagnóstico: ' + (data.error || 'error desconocido'));
             return;
         }
 
